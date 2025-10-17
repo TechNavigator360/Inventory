@@ -2,18 +2,36 @@ namespace Inventory.Domain.Entities;
 
 public abstract class Item
 {
-    public int MinQuantity { get; }
-    protected int CurrentQuantity { get; set; }
+    private Guid _id;
+    private string _sku;
+    private string _name;
+    private string _description;
+    private int _minQuantity;
+    private Location _location;
 
-    protected Item(int currentQuantity, int minQuantity)
+    public Guid id => _id;
+    public string Sku => _sku;
+    public string Name => _name;
+    public string Description => _description;
+    public int MinQuantity => _minQuantity;
+    public Location location => _location;
+
+    protected Item(Guid id, string sku, string name, string description, int minQty, Location location)
     {
-        CurrentQuantity = currentQuantity;
-        MinQuantity = minQuantity;
+        _id = id;
+        _sku = sku ?? throw new ArgumentNullException(nameof(sku));
+        _name = name ?? throw new ArgumentNullException(nameof(name));
+        _description = description ?? string.Empty;
+        _minQuantity = minQty;
+        _location = location ?? throw new ArgumentNullException(nameof(location));
     }
 
     public bool NeedsReorder()
     {
-        return CurrentQuantity <= MinQuantity;
-    } 
+        return GetCurrentQuantity() <= _minQuantity;
+    }
 
+    public abstract int GetCurrentQuantity();
+    public abstract bool RequiresSerialNumber();
+    protected abstract void AdjustQuantity(int delta);
 }
