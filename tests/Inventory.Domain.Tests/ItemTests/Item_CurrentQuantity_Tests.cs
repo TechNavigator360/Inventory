@@ -16,7 +16,7 @@ namespace Inventory.Domain.Tests.ItemTests
             try
             {
                 // nieuwe Consumable met negatieve voorraad
-                var item = new Consumable(Guid.NewGuid(), "SKU-01", "Test Item", "test beschrijving", -5, location, 10);
+                var item = new Consumable(Guid.NewGuid(), "SKU-01", "Test Item", "test beschrijving", 10, location, -5);
 
                 // Assert
                 Console.WriteLine("FOUT: Er is geen uitzondering gegooid bij een negatieve voorraad (verwacht: ArgumentOutOfRangeException).");

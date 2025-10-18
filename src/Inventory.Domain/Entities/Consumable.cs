@@ -9,6 +9,9 @@ public class Consumable : Item
     public Consumable(Guid id, string sku, string name, string description, int minQty, Location location, int currentQuantity)
         : base(id, sku, name, description, minQty, location)
     {
+        if (currentQuantity < 0)
+            throw new ArgumentOutOfRangeException(nameof(currentQuantity), "CurrentQuantity, actuele voorraad mag niet negatief zijn.");
+            
         _currentQuantity = currentQuantity;
     }
 
