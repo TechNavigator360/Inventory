@@ -31,9 +31,9 @@ public abstract class Item
         return GetCurrentQuantity() <= _minQuantity;
     }
 
-    public bool CanCheckOut(int amouont)
+    public bool CanCheckOut(int amount)
     {
-        return amouont > 0 && amouont <= GetCurrentQuantity();
+        return amount > 0 && amount <= GetCurrentQuantity();
     }
     public abstract int GetCurrentQuantity();
     public abstract bool RequiresSerialNumber();
