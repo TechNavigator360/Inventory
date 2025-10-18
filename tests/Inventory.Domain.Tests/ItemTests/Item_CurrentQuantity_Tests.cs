@@ -1,7 +1,6 @@
 using Xunit;
 using Inventory.Domain.Entities;
 using System;
-using System.Reflection;
 
 namespace Inventory.Domain.Tests.ItemTests
 {
