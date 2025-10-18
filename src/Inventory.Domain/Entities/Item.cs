@@ -31,6 +31,10 @@ public abstract class Item
         return GetCurrentQuantity() <= _minQuantity;
     }
 
+    public bool CanCheckOut(int amouont)
+    {
+        return amouont > 0 && amouont <= GetCurrentQuantity();
+    }
     public abstract int GetCurrentQuantity();
     public abstract bool RequiresSerialNumber();
     protected abstract void AdjustQuantity(int delta);
