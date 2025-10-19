@@ -5,6 +5,7 @@ namespace Inventory.Domain.Entities;
 public class Consumable : Item
 {
     private int _currentQuantity;
+    public int CurrentQuantity => _currentQuantity;
 
     public Consumable(Guid id, string sku, string name, string description, int minQty, Location location, int currentQuantity)
         : base(id, sku, name, description, minQty, location)

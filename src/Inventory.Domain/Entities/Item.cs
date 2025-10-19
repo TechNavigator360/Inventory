@@ -9,12 +9,12 @@ public abstract class Item
     private int _minQuantity;
     private Location _location;
 
-    public Guid id => _id;
+    public Guid Id => _id;
     public string Sku => _sku;
     public string Name => _name;
     public string Description => _description;
     public int MinQuantity => _minQuantity;
-    public Location location => _location;
+    public Location Location => _location;
 
     protected Item(Guid id, string sku, string name, string description, int minQty, Location location)
     {

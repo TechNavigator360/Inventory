@@ -53,7 +53,7 @@ namespace Inventory.Domain.Tests.ItemTests
                 }
                 else
                 {
-                    Console.WriteLine($"✅ SUCCES (verwacht): CanCheckOut retourneerde FALSE voor ongeldige hoeveelheid ({amount}).");
+                    Console.WriteLine($"SUCCES (verwacht): CanCheckOut retourneerde FALSE voor ongeldige hoeveelheid ({amount}).");
                 }
 
                 Assert.Equal(originalQuantity, item.GetCurrentQuantity()); // voorraad mag niet wijzigen
