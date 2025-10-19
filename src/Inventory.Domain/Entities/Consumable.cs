@@ -16,7 +16,7 @@ public class Consumable : Item
         _currentQuantity = currentQuantity;
     }
 
-    protected override void AdjustQuantity(int delta)
+    protected internal override void AdjustQuantity(int delta)
     {
         _currentQuantity += delta;
     }

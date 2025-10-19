@@ -37,5 +37,5 @@ public abstract class Item
     }
     public abstract int GetCurrentQuantity();
     public abstract bool RequiresSerialNumber();
-    protected abstract void AdjustQuantity(int delta);
+    protected internal abstract void AdjustQuantity(int delta);
 }

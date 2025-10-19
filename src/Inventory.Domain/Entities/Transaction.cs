@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Reflection.Metadata;
 
 namespace Inventory.Domain.Entities;
@@ -25,6 +26,15 @@ public abstract class Transaction
         _ticket = ticket ?? throw new ArgumentNullException(nameof(ticket));
     }
 
-    public abstract void Apply();
+    public void Apply()
+    {
+        Validate();
+        int delta = GetChangeAmount();
+        GetSerialChange();
+        _item.AdjustQuantity(delta);
+    }
 
-}
+    protected abstract void Validate();
+    protected abstract int GetChangeAmount();
+    protected abstract void GetSerialChange();
+}        
