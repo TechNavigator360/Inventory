@@ -1,6 +1,3 @@
-using System.Net.Http.Headers;
-using System.Reflection.Metadata;
-
 namespace Inventory.Domain.Entities;
 
 public abstract class Transaction

@@ -1,5 +1,3 @@
-using System.ComponentModel.Design;
-
 namespace Inventory.Domain.Entities;
 
 public class Consumable : Item
