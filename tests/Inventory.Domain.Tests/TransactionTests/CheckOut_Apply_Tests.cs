@@ -43,5 +43,39 @@ namespace Inventory.Domain.Tests.TransactionTests
 
             Console.WriteLine("SUCCES: CheckOut verlaagt de voorraad correct met Amount.");
         }
+
+        [Fact]
+        public void CheckOut_apply_ShouldSetQuantityToZero_WhenAmountEqualsCurrentQuantity()
+        {
+            // Arrange
+            var item = new Consumable(
+                id: Guid.NewGuid(),
+                sku: "BATT-UNIT-NWM",
+                name: "Battery Unit",
+                description: "Replaces battery packs",
+                minQty: 10,
+                location: new Location(
+                    id: Guid.NewGuid(),
+                    name: "B1",
+                    capacity: 50),
+                currentQuantity: 5);
+
+            var checkOut = new CheckOut(
+                id: Guid.NewGuid(),
+                timestamp: DateTime.Now,
+                item: item,
+                user: new User("00002", "Blair Streetwise"),
+                ticket: new Ticket(Guid.NewGuid()),
+                amount: 5);
+
+            // Act 
+            checkOut.Apply();
+
+            // Assert
+            Assert.Equal(0, item.CurrentQuantity);
+
+            Console.WriteLine($"CheckOut applied: Expected stock = 0, Actual stock = {item.CurrentQuantity}");
+        }
+
     }
 }
