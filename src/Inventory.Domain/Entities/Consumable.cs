@@ -14,11 +14,6 @@ public class Consumable : Item
         _currentQuantity = currentQuantity;
     }
 
-    protected internal override void AdjustQuantity(int delta)
-    {
-        _currentQuantity += delta;
-    }
-
     public override int GetCurrentQuantity()
     {
         return _currentQuantity;
@@ -27,5 +22,10 @@ public class Consumable : Item
     public override bool RequiresSerialNumber()
     {
         return false;
+    }
+
+    protected internal override void AdjustQuantity(int delta)
+    {
+        _currentQuantity += delta;
     }
 }

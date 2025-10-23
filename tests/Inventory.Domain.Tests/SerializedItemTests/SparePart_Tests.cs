@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 using Inventory.Domain.Entities;
-using System.Reflection;
-using System.ComponentModel;
 
 namespace Inventory.Domain.Tests.SerializedItemTests
 {
@@ -18,14 +16,14 @@ namespace Inventory.Domain.Tests.SerializedItemTests
             var location = new Location(Guid.NewGuid(), "A1", 20);
 
             // Act
-            var sparePart = new SparePart_Tests(
+            var sparePart = new SparePart(
                 id: id,
                 sku: "HDD-1TB-NWM",
                 name: "1TB HDD 7200RPM",
                 description: "Serial tracked 1TB HHD hot swapable",
                 minQty: 2,
                 location: location,
-                serialNumbers = serialNumbers
+                serialNumbers: serialNumbers
             );
 
             // Assert
