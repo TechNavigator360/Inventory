@@ -103,7 +103,7 @@ namespace Inventory.Domain.Tests.TransactionTests
 
             // Act / Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => checkOut.Apply());
-            Console.WriteLine("SUCCES: Expected ArgumentOutOfRangeException was thrown.");
+            Console.WriteLine("SUCCES: Expected ArgumentOutOfRangeException was thrown when CheckOut amount <= 0.");
         }
     }
 }   
