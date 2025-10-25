@@ -12,7 +12,7 @@ public class SparePart : Item
         string description,
         int minQty,
         Location location,
-        List<string> serialNumbers)
+        IEnumerable<string> serialNumbers)
         : base(id, sku, name, description, minQty, location)
     {
         _serialItems = new HashSet<SerializedItem>();
