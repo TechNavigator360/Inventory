@@ -32,5 +32,30 @@ namespace Inventory.Domain.Tests.SerializedItemTests
 
             Console.WriteLine("SUCCES: Verwachte 3 SerializedItems bij creatie van SparePart");
         }
+
+        [Fact]
+        public void SparePart_ShouldThrow_WhenSerializedItemListIsEmpty()
+        {
+            // Arrange 
+            var location = new Location(
+                id: Guid.NewGuid(),
+                name: "A4",
+                capacity: 20);
+
+            var emptySerials = new List<string>();
+
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() =>
+                new SparePart(
+                    id: Guid.NewGuid(),
+                    sku: "SP-EMPTY",
+                    name: "Empty serial test.",
+                    description: "Test voor UT-S1-Guard",
+                    minQty: 2,
+                    location: location,
+                    serialNumbers: emptySerials));
+
+            Console.WriteLine($"FOUT [UT-S1-Guard]: {ex.Message}");
+        }
     }
 }
