@@ -21,6 +21,9 @@ public class CheckOut : Transaction
     }
     protected override void Validate()
     {
+        if (_amount <= 0)
+            throw new ArgumentOutOfRangeException(nameof(_amount), $"De uitgiftehoeveelheid moet groter zijn dan nul (opgegeven: {_amount}).");
+            
         if (!Item.CanCheckOut(_amount))
             throw new InvalidOperationException("Uitgifte niet toegestaan: hoeveelheid ongeldig of te groot.");
     }
