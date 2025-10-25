@@ -77,5 +77,33 @@ namespace Inventory.Domain.Tests.TransactionTests
             Console.WriteLine($"CheckOut applied: Expected stock = 0, Actual stock = {item.CurrentQuantity}");
         }
 
+        [Fact]
+        public void CheckOut_Apply_ShouldThrow_WhenAmountNonPositive()
+        {
+            // Arrange
+            var location = new Location(Guid.NewGuid(), "B3", 100);
+            var consumable = new Consumable(
+                id: Guid.NewGuid(),
+                sku: "CBL-SATA-50CM",
+                name: "SATA Cable 50cm",
+                description: "standard SATA cable",
+                minQty: 10,
+                location: location,
+                currentQuantity: 15);
+
+            var user = new User("00001", "Shady George");
+            var ticket = new Ticket(Guid.NewGuid());
+            var checkOut = new CheckOut(
+                Guid.NewGuid(),
+                DateTime.UtcNow,
+                consumable,
+                user,
+                ticket,
+                amount: 0);
+
+            // Act / Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => checkOut.Apply());
+            Console.WriteLine("SUCCES: Expected ArgumentOutOfRangeException was thrown.");
+        }
     }
-}
+}   
