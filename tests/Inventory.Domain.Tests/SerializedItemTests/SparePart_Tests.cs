@@ -57,5 +57,59 @@ namespace Inventory.Domain.Tests.SerializedItemTests
 
             Console.WriteLine($"FOUT [UT-S1-Guard]: {ex.Message}");
         }
+
+        [Fact]
+        public void SparePart_ShouldThrow_WhenDuplicateSerialsProvided()
+        {
+            // (duplicate DI-1)
+            // Arrange
+            var location = new Location(Guid.NewGuid(), "A2", 20);
+
+            var serialsWithDuplicate = new List<string> { "HHD20145872TB", "HHD20164562TB", "HHD20183252TB", "HHD20183252TB" };
+
+            // Act & Assert 
+            var ex = Assert.Throws<ArgumentException>(() =>
+            new SparePart(
+                id: Guid.NewGuid(),
+                sku: "HDD-2TB-NWM",
+                name: "2TB HDD 7200RPM",
+                description: "Duplicate serial HHD20183252TB test.",
+                minQty: 2,
+                location: location,
+                serialNumbers: serialsWithDuplicate));
+
+            Console.WriteLine($"FOUT: [UT-S1-Structure | DI-1]: {ex.Message}");
+        }
+
+        [Fact]
+        public void SparePart_GetCurrentQuantity_ShouldCountOnlyAvailableItems()
+        {      
+            // (availibility DI-2)
+            // Arrange
+            var location1 = new Location(Guid.NewGuid(), "A3", 20);
+
+            var serials = new List<string> { "HHD94693114TB", "HHD17157004TB", "HHD27504584TB", "HHD05683134TB" };
+            var sparePart = new SparePart(
+                id: Guid.NewGuid(),
+                sku: "HDD-4TB-NWM",
+                name: "4TB HDD 7200RPM",
+                description: "Is HHD94693114TB available?",
+                minQty: 2,
+                location: location1,
+                serialNumbers: serials);
+
+            // Simulate HHD94693114TB unavailable
+            var firstItem = sparePart.SerializedItems.First();
+            typeof(SerializedItem)
+                .GetProperty("IsAvailable")!
+                .SetValue(firstItem, false);
+
+            // Act
+            var currentQty = sparePart.GetCurrentQuantity();
+
+            // Assert
+            Assert.NotEqual(sparePart.SerializedItems.Count, currentQty);
+            Console.WriteLine($"FOUT: [UT-S1-Structure | DI-2]: GetCurrentQuantity() telt nog onbeschikbare item HHD94693114TB mee.");
+        }
     }
 }
