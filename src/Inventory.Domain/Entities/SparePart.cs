@@ -20,6 +20,11 @@ public class SparePart : Item
                 "Een SparePart moet minstens één SerializedItem bevatten.",
                 nameof(serialNumbers));
 
+        if (serialNumbers.GroupBy(sn => sn).Any(g => g.Count() > 1))
+            throw new ArgumentException(
+                "Dubbele serienummers zijn niet toegestaan.",
+                nameof(serialNumbers));
+
         _serialItems = new HashSet<SerializedItem>();
 
         foreach (string sn in serialNumbers)

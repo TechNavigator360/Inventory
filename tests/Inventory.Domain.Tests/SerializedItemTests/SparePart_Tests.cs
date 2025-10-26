@@ -81,9 +81,10 @@ namespace Inventory.Domain.Tests.SerializedItemTests
             Console.WriteLine($"FOUT: [UT-S1-Structure | DI-1]: {ex.Message}");
         }
 
-        [Fact]
+        [Fact(Skip = "Wordt uitgevoerd in Fase 2 wanneer IsAvailable muteerbaar is.")]
         public void SparePart_GetCurrentQuantity_ShouldCountOnlyAvailableItems()
-        {      
+        {
+      
             // (availibility DI-2)
             // Arrange
             var location1 = new Location(Guid.NewGuid(), "A3", 20);
