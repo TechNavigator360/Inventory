@@ -15,7 +15,13 @@ public class SparePart : Item
         IEnumerable<string> serialNumbers)
         : base(id, sku, name, description, minQty, location)
     {
+        if (serialNumbers == null || !serialNumbers.Any())
+            throw new ArgumentException(
+                "Een SparePart moet minstens één SerializedItem bevatten.",
+                nameof(serialNumbers));
+
         _serialItems = new HashSet<SerializedItem>();
+
         foreach (string sn in serialNumbers)
         {
             _serialItems.Add(new SerializedItem(Guid.NewGuid(), sn, true));
