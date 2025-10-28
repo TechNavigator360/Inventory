@@ -45,7 +45,7 @@ namespace Inventory.Domain.Tests.TransactionTests
         }
 
         [Fact]
-        public void CheckOut_apply_ShouldSetQuantityToZero_WhenAmountEqualsCurrentQuantity()
+        public void CheckOut_Apply_ShouldSetQuantityToZero_WhenAmountEqualsCurrentQuantity()
         {
             // Arrange
             var item = new Consumable(
