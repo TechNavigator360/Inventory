@@ -30,8 +30,35 @@ namespace Inventory.Domain.Tests.ItemTests
             catch (Exception ex)
             {
                 Console.WriteLine($"FOUT: Onverwachte uitzondering gevangen → {ex.GetType().Name}: {ex.Message}");
-                Assert.Fail("Onverwachte uitzondering van een ander type.");                
+                Assert.Fail("Onverwachte uitzondering van een ander type.");
             }
+        }
+
+        [Fact]
+        public void Item_UpdateQuantity_ShouldSucceed_WhenPositiveAmount()
+        {
+            // Arrange
+            var location = new Location(Guid.NewGuid(), "B1", 50);
+            var consumable = new Consumable(
+                id: Guid.NewGuid(),
+                sku: "BATT-UNIT-NWM",
+                name: "Battery Unit",
+                description: "replaces battery packs",
+                minQty: 5,
+                location: location,
+                currentQuantity: 10);
+
+            var delta = 5;
+
+            // Act
+            consumable.AdjustQuantity(delta);
+            var result = consumable.GetCurrentQuantity();
+
+            // Assert
+            Assert.Equal(15, result);
+            Assert.True(result >= 0);
+
+            Console.WriteLine($"SUCCES: Voorraad correct bijgewerkt, nieuwe waarde: {result}");
         }
     }
 }

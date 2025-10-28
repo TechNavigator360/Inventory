@@ -58,7 +58,7 @@ namespace Inventory.Domain.Tests.TransactionTests
 
             public void OnValidateCalled() => _validateCalled = true;
 
-            protected override void AdjustQuantity(int delta)
+            protected internal override void AdjustQuantity(int delta)
             {
                 ValidateWasCalledBeforeAdjust = _validateCalled;
                 base.AdjustQuantity(delta);
