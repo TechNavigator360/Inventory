@@ -64,5 +64,36 @@ namespace Inventory.Domain.Tests.TransactionTests
                 base.AdjustQuantity(delta);
             }
         }
+
+        [Fact]
+        public void Transaction_Apply_ShouldThrow_WhenValidationFails()
+        {
+            // Arrange
+            var location = new Location(Guid.NewGuid(), "B1", 50);
+            var item = new Consumable(Guid.NewGuid(), "BATT-UNIT-NWM", "Battery Unit", "replaces battery packs", 5, location, 10);
+            var user = new User("00003", "Soda Pop");
+            var ticket = new Ticket(Guid.NewGuid());
+
+            var invalidCheckOut = new InvalidCheckOut(Guid.NewGuid(), DateTime.Now, item, user, ticket, amount: 5);
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => invalidCheckOut.Apply());
+            Console.WriteLine("SUCCES: Apply() gooide correct een uitzondering bij mislukte validatie.");
+        }
+
+        // Instrumented class to simulate failed validation
+        internal class InvalidCheckOut : CheckOut
+        {
+            public InvalidCheckOut(Guid id, DateTime timestamp, Item item, User user, Ticket ticket, int amount)
+                : base(id, timestamp, item, user, ticket, amount) { }
+
+            protected override void Validate()
+            {
+                throw new InvalidOperationException("Transactie ongeldig volgens BR-T1.");
+            }
+
+            protected override int GetChangeAmount() => -5;
+            protected override void GetSerialChange() { /* not applicable */ }
+        }
     }
 }

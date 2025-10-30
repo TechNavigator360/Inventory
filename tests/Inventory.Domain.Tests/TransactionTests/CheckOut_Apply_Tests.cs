@@ -105,5 +105,28 @@ namespace Inventory.Domain.Tests.TransactionTests
             Assert.Throws<ArgumentOutOfRangeException>(() => checkOut.Apply());
             Console.WriteLine("SUCCES: Expected ArgumentOutOfRangeException was thrown when CheckOut amount <= 0.");
         }
+
+        [Fact]
+        public void CheckOut_Apply_ShouldThrow_WhenAmountTooHigh()
+        {
+            // Arrange
+            var location = new Location(Guid.NewGuid(), "B2", 20);
+            var item = new Consumable(Guid.NewGuid(), "IDRAC-MOD-NWM", "iDRAC Module", "management module", 2, location, 10);
+            var user = new User("00004", "Mac Black");
+            var ticket = new Ticket(Guid.NewGuid());
+
+            // An invalid CheckOut request - amount > available stock
+            var checkout = new CheckOut(
+                Guid.NewGuid(),
+                DateTime.Now,
+                item,
+                user,
+                ticket,
+                15);
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => checkout.Apply());
+            Console.WriteLine("SUCCES: CheckOut blokkeerde een te hoge uitgifte en gooide een InvalidOperationException");
+        }
     }
 }   
