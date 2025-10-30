@@ -2,11 +2,11 @@ namespace Inventory.Domain.Entities;
 
 public abstract class Transaction
 {
-    private Guid _id;
-    private DateTime _timestamp;
-    private Item _item;
-    private User _user;
-    private Ticket _ticket;
+    private readonly Guid _id;
+    private readonly DateTime _timestamp;
+    private readonly Item _item;
+    private readonly User _user;
+    private readonly Ticket _ticket;
 
     public Guid Id => _id;
     public DateTime Timestamp => _timestamp;
@@ -16,6 +16,9 @@ public abstract class Transaction
 
     protected Transaction(Guid id, DateTime timestamp, Item item, User user, Ticket ticket)
     {
+        if (id == Guid.Empty)
+            throw new ArgumentException("Id mag niet leeg zijn.", nameof(id));
+            
         _id = id;
         _timestamp = timestamp;
         _item = item ?? throw new ArgumentNullException(nameof(item));
