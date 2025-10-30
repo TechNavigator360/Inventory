@@ -14,7 +14,7 @@ namespace Inventory.Domain.Tests.TransactionTests
             var item = new ConsumableSpy(Guid.NewGuid(), "CBL-SATA-50CM", "SATA Cable 50cm", "Standard data cable", 10, location, 50);
 
             var user = new User("00002", "Blair Streetwise");
-            var ticket = new Ticket(Guid.NewGuid());
+            var ticket = new Ticket(Guid.NewGuid(), Ticket.TicketType.Service);
             var checkout = new InstrumentedCheckOut(Guid.NewGuid(), DateTime.Now, item, user, ticket, 5);
 
             // Act
@@ -72,8 +72,7 @@ namespace Inventory.Domain.Tests.TransactionTests
             var location = new Location(Guid.NewGuid(), "B1", 50);
             var item = new Consumable(Guid.NewGuid(), "BATT-UNIT-NWM", "Battery Unit", "replaces battery packs", 5, location, 10);
             var user = new User("00003", "Soda Pop");
-            var ticket = new Ticket(Guid.NewGuid());
-
+            var ticket = new Ticket(Guid.NewGuid(), Ticket.TicketType.Service);
             var invalidCheckOut = new InvalidCheckOut(Guid.NewGuid(), DateTime.Now, item, user, ticket, amount: 5);
 
             // Act & Assert

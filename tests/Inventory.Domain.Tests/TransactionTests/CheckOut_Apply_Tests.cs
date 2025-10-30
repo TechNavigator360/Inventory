@@ -24,7 +24,7 @@ namespace Inventory.Domain.Tests.TransactionTests
             );
 
             var user = new User("00002", "Blair Streetwise");
-            var ticket = new Ticket(Guid.NewGuid());
+            var ticket = new Ticket(Guid.NewGuid(), Ticket.TicketType.Service);
 
             var checkOut = new CheckOut(
                 id: Guid.NewGuid(),
@@ -65,7 +65,7 @@ namespace Inventory.Domain.Tests.TransactionTests
                 timestamp: DateTime.Now,
                 item: item,
                 user: new User("00002", "Blair Streetwise"),
-                ticket: new Ticket(Guid.NewGuid()),
+                ticket: new Ticket(Guid.NewGuid(), Ticket.TicketType.Service),
                 amount: 5);
 
             // Act 
@@ -92,7 +92,7 @@ namespace Inventory.Domain.Tests.TransactionTests
                 currentQuantity: 15);
 
             var user = new User("00001", "Shady George");
-            var ticket = new Ticket(Guid.NewGuid());
+            var ticket = new Ticket(Guid.NewGuid(), Ticket.TicketType.Service);
             var checkOut = new CheckOut(
                 Guid.NewGuid(),
                 DateTime.UtcNow,
@@ -113,7 +113,7 @@ namespace Inventory.Domain.Tests.TransactionTests
             var location = new Location(Guid.NewGuid(), "B2", 20);
             var item = new Consumable(Guid.NewGuid(), "IDRAC-MOD-NWM", "iDRAC Module", "management module", 2, location, 10);
             var user = new User("00004", "Mac Black");
-            var ticket = new Ticket(Guid.NewGuid());
+            var ticket = new Ticket(Guid.NewGuid(), Ticket.TicketType.Service);
 
             // An invalid CheckOut request - amount > available stock
             var checkout = new CheckOut(

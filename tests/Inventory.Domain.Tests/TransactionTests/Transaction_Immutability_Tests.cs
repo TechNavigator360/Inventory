@@ -21,7 +21,7 @@ namespace Inventory.Domain.Tests.TransactionTests
                 currentQuantity: 20);
 
             var user = new User("00005", "Mauve Spring");
-            var ticket = new Ticket(Guid.NewGuid());
+            var ticket = new Ticket(Guid.NewGuid(), Ticket.TicketType.Service);
 
             // Create a valid CheckOut transaction
             var checkout = new CheckOut(
