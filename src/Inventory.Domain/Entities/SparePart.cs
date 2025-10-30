@@ -2,7 +2,7 @@ namespace Inventory.Domain.Entities;
 
 public class SparePart : Item
 {
-    private HashSet<SerializedItem> _serialItems;
+    private readonly HashSet<SerializedItem> _serialItems;
     public IReadOnlyCollection<SerializedItem> SerializedItems => _serialItems;
 
     public SparePart(
