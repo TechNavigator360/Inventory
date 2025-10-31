@@ -1,3 +1,4 @@
+namespace Inventory.Domain.Entities;
 public class Ticket
 {
     private readonly Guid _id;
