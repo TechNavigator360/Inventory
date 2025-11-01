@@ -81,7 +81,7 @@ namespace Inventory.Domain.Tests.SerializedItemTests
             Console.WriteLine($"FOUT: [UT-S1-Structure | DI-1]: {ex.Message}");
         }
 
-        [Fact(Skip = "Wordt uitgevoerd in Fase 2 wanneer IsAvailable muteerbaar is.")]
+        [Fact (Skip = "Wordt uitgevoerd in Fase 2 wanneer IsAvailable muteerbaar is.")]
         public void SparePart_GetCurrentQuantity_ShouldCountOnlyAvailableItems()
         {
       
@@ -99,7 +99,7 @@ namespace Inventory.Domain.Tests.SerializedItemTests
                 location: location1,
                 serialNumbers: serials);
 
-            // Simulate HHD94693114TB unavailable
+            // Simulate HHD94693114TB unavailable with Reflection
             var firstItem = sparePart.SerializedItems.First();
             typeof(SerializedItem)
                 .GetProperty("IsAvailable")!

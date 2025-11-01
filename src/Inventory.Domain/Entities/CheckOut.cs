@@ -36,6 +36,6 @@ public class CheckOut : Transaction
 
     protected override void GetSerialChange()
     {
-        //placeholder
+        //placeholder, implementation in upcoming phase
     }
 }

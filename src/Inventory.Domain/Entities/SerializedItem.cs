@@ -17,9 +17,15 @@ public class SerializedItem
 
         if (string.IsNullOrWhiteSpace(serialNumber))
             throw new ArgumentNullException(nameof(serialNumber));
-            
+
         _id = id;
         _serialNumber = serialNumber;
         _isAvailable = isAvailable;
+    }
+    
+    public void SetAvailability(bool state)
+    {
+        // TODO: implement domain logic in upcoming phase
+        throw new NotImplementedException("SetAvailibility wordt in een volgende fase geimplementeerd.");
     }
 }

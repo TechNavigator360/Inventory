@@ -49,6 +49,6 @@ public class SparePart : Item
 
     protected internal override void AdjustQuantity(int delta)
     {
-        
+        // Placeholder: serial mutation logic will be implemented in upcoming phase
     }
 }
