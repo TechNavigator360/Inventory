@@ -3,7 +3,7 @@ namespace Inventory.Domain.Entities;
 public class CheckOut : Transaction
 {
     private readonly int _amount;
-    private readonly List<string> _serials = new();
+    private readonly List<string> _serials = new List<string>();
 
     // Item.Consumable.CheckOut
     public CheckOut(Guid id, DateTime timestamp, Item item, User user, Ticket ticket, int amount)
